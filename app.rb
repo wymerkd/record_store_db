@@ -45,3 +45,23 @@ delete ('/albums/:id') do
   @album.delete()
   redirect to('/albums')
 end
+
+get ('/albums/:id/songs') do
+
+end
+
+get ('/albums/:id/songs/:id') do
+
+end
+
+post ('/albums/:id/songs') do
+
+end
+
+patch ('/albums/:id/songs/:id') do
+
+end
+
+delete ('/albums/:id/songs/:id') do
+
+end
