@@ -90,4 +90,12 @@ describe '#Song' do
       expect(Song.find_by_album(album2.id)).to(eq([song2]))
     end
   end
+
+  describe('#album') do
+    it("finds the album a song belongs to") do
+      song = Song.new("Naima", @album.id, nil)
+      song.save()
+      expect(song.album()).to(eq(@album))
+    end
+  end
 end
