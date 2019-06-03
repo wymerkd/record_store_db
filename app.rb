@@ -47,10 +47,6 @@ delete ('/albums/:id') do
   redirect to('/albums')
 end
 
-get ('/albums/:id/songs') do
-  @album = Album.find(params[:id].to_i())
-end
-
 get ('/albums/:id/songs/:song_id') do
   @song = Song.find(params[:song_id].to_i())
   erb(:song)
@@ -65,14 +61,14 @@ end
 
 patch ('/albums/:id/songs/:song_id') do
   @album = Album.find(params[:id].to_i())
-  @song = Song.find(params[:song_id].to_i())
-  @song.update(params[:name], @album.id)
-  redirect to("/albums/#{@album.id}")
+  song = Song.find(params[:song_id].to_i())
+  song.update(params[:name], @album.id)
+  erb(:album)
 end
 
 delete ('/albums/:id/songs/:song_id') do
-  @song = Song.find(params[:song_id].to_i())
-  @song.delete
+  song = Song.find(params[:song_id].to_i())
+  song.delete
   @album = Album.find(params[:id].to_i())
   erb(:album)
 end
