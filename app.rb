@@ -20,7 +20,7 @@ end
 
 post ('/albums') do
   name = params[:album_name]
-  album = Album.new(name, nil)
+  album = Album.new({:name => name, :id => nil})
   album.save()
   redirect to('/albums')
 end
@@ -54,7 +54,7 @@ end
 
 post ('/albums/:id/songs') do
   @album = Album.find(params[:id].to_i())
-  song = Song.new(params[:song_name], @album.id, nil)
+  song = Song.new({:name => params[:song_name], :album_id => @album.id, :id => nil})
   song.save()
   erb(:album)
 end

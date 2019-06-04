@@ -5,10 +5,10 @@ class Song
   @@songs = {}
   @@total_rows = 0
 
-  def initialize(name, album_id, id)
-    @name = name
-    @album_id = album_id
-    @id = id || @@total_rows += 1
+  def initialize(attributes)
+    @name = attributes.fetch(:name)
+    @album_id = attributes.fetch(:album_id)
+    @id = attributes.fetch(:id) || @@total_rows += 1
   end
 
   def ==(song_to_compare)
@@ -20,7 +20,7 @@ class Song
   end
 
   def save
-    @@songs[self.id] = Song.new(self.name, self.album_id, self.id)
+    @@songs[self.id] = Song.new({:name => self.name, :album_id => self.album_id, :id => self.id})
   end
 
   def self.find(id)
@@ -30,7 +30,7 @@ class Song
   def update(name, album_id)
     self.name = name
     self.album_id = album_id
-    @@songs[self.id] = Song.new(self.name, self.album_id, self.id)
+    @@songs[self.id] = Song.new({:name => self.name, :album_id => self.album_id, :id => self.id})
   end
 
   def delete
