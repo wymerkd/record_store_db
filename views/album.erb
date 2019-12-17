@@ -22,7 +22,13 @@
   <button type="submit" class="btn">Add song</button>
 </form>
 
+<form action="/albums/<%= @album.id() %>/buy" method="get">
+  <input name="_method" type="hidden" value="buy">
+  <button type="submit">Buy Album</button>
+</form>
+<form action="/albums/<%= @album.id() %>/edit" method="get">
+  <input name="_method" type="hidden" value="edit">
+  <button type="submit">Edit Album</button>
+</form>
 
-<p><a href="/albums/<%= @album.id %>/buy">Buy Album</a>
-<p><a href="/albums/<%= @album.id %>/edit">Edit album</a></p>
 <p><a href="/albums">Return to album list</a></p>

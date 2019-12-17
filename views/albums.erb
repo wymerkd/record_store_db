@@ -1,15 +1,8 @@
 <h1>All Sales Vinyl</h1>
 
-<h3>Available Records</h3>
+<h2>Available Records</h2>
 
-<form action="/albums/search" method="get">
-  <div class="form-group">
-    <label for="search">Search</label>
-    <input id="search" name="search" class="form-control" type="text">
-  </div>
-  <button type="submit" class="btn">Search</button>
-</form>
-<h2>Current Albums:</h2>
+<h3>Current Albums:</h3>
 <% if @albums.any? %>
   <ul>
     <% @albums.each do |album| %>
@@ -19,8 +12,11 @@
 <% else %>
   <p>There are currently no records to display.</p>
 <% end %>
+<form class="" action="/albums/new" method="get">
+  <button type="submit" name="button">Add a new album</button>
+</form>
 
-<h2>Sold Albums:</h2>
+<h3>Sold Albums:</h3>
 <% if @albums_sold.any? %>
   <ul>
     <% @albums_sold.each do |album| %>
@@ -31,4 +27,10 @@
   <p>There are currently no records to display.</p>
 <% end %>
 
-<a href="/albums/new">Add a new album</a>
+<form action="/albums/search" method="get">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input id="search" name="search" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Search</button>
+</form>

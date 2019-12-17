@@ -10,7 +10,7 @@ get('/') do
 end
 
 get('/albums') do
-  @albums = Album.all
+  @albums = Album.sort
   @albums_sold = Album.all_sold
   erb(:albums)
 end
