@@ -11,6 +11,7 @@ end
 
 get('/albums') do
   @albums = Album.all
+  @albums_sold = Album.all_sold
   erb(:albums)
 end
 
@@ -29,7 +30,7 @@ get ('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   erb(:album)
 end
-#
+
 get ('/albums/:id/edit') do
   @album = Album.find(params[:id].to_i())
   erb(:edit_album)
@@ -41,6 +42,12 @@ patch ('/albums/:id') do
   redirect to('/albums')
 end
 
+get ('/albums/:id/buy') do
+
+    @album = Album.find(params[:id].to_i())
+    @album.sold
+    redirect to('/albums')
+end
 delete ('/albums/:id') do
   @album = Album.find(params[:id].to_i())
   @album.delete()

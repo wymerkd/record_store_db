@@ -9,11 +9,22 @@
   </div>
   <button type="submit" class="btn">Search</button>
 </form>
-
+<h2>Current Albums:</h2>
 <% if @albums.any? %>
   <ul>
     <% @albums.each do |album| %>
       <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no records to display.</p>
+<% end %>
+
+<h2>Sold Albums:</h2>
+<% if @albums_sold.any? %>
+  <ul>
+    <% @albums_sold.each do |album| %>
+      <li><%= album.name %></li>
     <% end %>
   </ul>
 <% else %>

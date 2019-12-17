@@ -86,4 +86,41 @@ describe '#Album' do
       expect(album.songs).to(eq([song, song2]))
     end
   end
+
+  describe('.search') do
+    it("searches for an album by name") do
+      album = Album.new({:name => "A Love Supreme", :id => nil})
+      album.save()
+      album2 = Album.new({:name => "Blue", :id => nil})
+      album2.save()
+      expect(Album.search("blue")).to(eq([album2]))
+    end
+  end
+
+  describe('.sort') do
+    it("sorts albums by name") do
+      album = Album.new({:name => "Blue", :id => nil})
+      album.save()
+      album2 = Album.new({:name => "A Love Supreme", :id => nil})
+      album2.save()
+      album3 = Album.new({:name => "Moving Pictures", :id => nil})
+      album3.save()
+      expect(Album.sort()).to(eq([[album2], [album], [album3]]))
+    end
+  end
+  describe('#sold') do
+    it("sorts albums by name") do
+      album = Album.new({:name => "Blue", :id => nil})
+      album.save()
+      album2 = Album.new({:name => "A Love Supreme", :id => nil})
+      album2.save()
+      album3 = Album.new({:name => "Moving Pictures", :id => nil})
+      album3.save()
+      album.sold()
+      expect(Album.all_sold).to(eq([album]))
+    end
+  end
+
+
+
 end
