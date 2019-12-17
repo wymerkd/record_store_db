@@ -15,6 +15,13 @@ get('/albums') do
   erb(:albums)
 end
 
+get('/albums/search') do
+  user_search = params[:search]
+  @search = Album.search(user_search)
+  erb(:search)
+end
+
+
 get ('/albums/new') do
   erb(:new_album)
 end

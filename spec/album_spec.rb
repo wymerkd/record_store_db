@@ -93,7 +93,9 @@ describe '#Album' do
       album.save()
       album2 = Album.new({:name => "Blue", :id => nil})
       album2.save()
-      expect(Album.search("blue")).to(eq([album2]))
+      album3 = Album.new({:name => "Blues clues", :id => nil})
+      album3.save()
+      expect(Album.search("blue")).to(eq([album2, album3]))
     end
   end
 
@@ -105,7 +107,7 @@ describe '#Album' do
       album2.save()
       album3 = Album.new({:name => "Moving Pictures", :id => nil})
       album3.save()
-      expect(Album.sort()).to(eq([[album2], [album], [album3]]))
+      expect(Album.sort()).to(eq([album2, album, album3]))
     end
   end
   describe('#sold') do

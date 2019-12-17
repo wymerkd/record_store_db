@@ -1,0 +1,10 @@
+<h2>Search Results</h2>
+<% if @search.any? %>
+  <ul>
+    <% @search.each do |album| %>
+      <li><a href="/albums/<%= album.id %>"><%= album.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>no search results.</p>
+<% end %>

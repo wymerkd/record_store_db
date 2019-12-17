@@ -4,6 +4,7 @@ class Album
 
   @@albums = {}
   @@albums_sold = {}
+
   @@total_rows = 0
 
   def initialize(attributes)
@@ -36,8 +37,7 @@ class Album
   end
 
   def self.search(search)
-    result = self.all.map { |a| a if a.name.scan(/#{search}/i).join('') == a.name }
-    return result.compact
+    @@albums.values().select { |a| a.name.match(/#{search}/i)}
   end
 
   def update(name)
@@ -47,10 +47,11 @@ class Album
 
   def self.sort()
     sorted_array = []
+
     self.all.each do |a|
       sorted_array.push(a.name)
     end
-    results = sorted_array.sort.map { |a|  self.search(a) }
+    results = sorted_array.sort.map { |a|  self.search(a)[0] }
   end
 
   def delete
