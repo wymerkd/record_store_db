@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Sales Vinyl</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <div class="container">
+      <h1>All Sales Vinyl</h1>
+
+<h2>Available Records</h2>
+
+<h3>Current Albums:</h3>
+  <ul>
+    
+      <li><a href="/albums/1">Yellow Submarine</a></li>
+    
+  </ul>
+<form class="" action="/albums/new" method="get">
+  <button type="submit" name="button">Add a new album</button>
+</form>
+
+<h3>Sold Albums:</h3>
+  <p>There are currently no records to display.</p>
+
+<form action="/albums/search" method="get">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input id="search" name="search" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Search</button>
+</form>
+
+    </div>
+  </body>
+</html>

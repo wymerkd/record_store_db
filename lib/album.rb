@@ -47,7 +47,6 @@ class Album
 
   def self.sort()
     sorted_array = []
-
     self.all.each do |a|
       sorted_array.push(a.name)
     end
