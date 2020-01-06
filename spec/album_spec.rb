@@ -2,6 +2,7 @@ require 'rspec'
 require 'album'
 require 'song'
 require 'pry'
+require 'spec_helper'
 
 describe '#Album' do
 
@@ -110,6 +111,7 @@ describe '#Album' do
       expect(Album.sort()).to(eq([album2, album, album3]))
     end
   end
+
   describe('#sold') do
     it("sorts albums by name") do
       album = Album.new({:name => "Blue", :id => nil})
@@ -122,7 +124,5 @@ describe '#Album' do
       expect(Album.all_sold).to(eq([album]))
     end
   end
-
-
 
 end
