@@ -51,16 +51,19 @@ class Album
   end
 
   def update(attributes)
-    if (attributes.has_key?(:name)) && (attributes.fetch(:name) != nil)
+    if (attributes.has_key?(:name)) && (attributes.fetch(:name) != '')
       @name = attributes.fetch(:name)
       DB.exec("UPDATE albums SET name = '#{@name}' WHERE id = #{@id};")
     end
     artist_name = attributes.fetch(:artist_name)
     if artist_name != nil
       artist = DB.exec("SELECT * FROM artists WHERE lower(name) =  '#{artist_name.downcase}';").first
-      if artist != nil
-        DB.exec("INSERT INTO albums_artists (artist_id, album_id) VALUES (#{artist['id'].to_i}, #{@id});")
+      if artist == nil
+        new_artist = Album.new({:name => "#{artist_name}", :id => nil})
+        new_artist.save()
+        artist = DB.exec("SELECT * FROM artists WHERE id = #{new_artist.id};").first
       end
+      DB.exec("INSERT INTO albums_artists (artist_id, album_id) VALUES (#{artist['id'].to_i}, #{@id});")
     end
   end
 

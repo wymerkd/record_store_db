@@ -109,4 +109,14 @@ describe '#Artist' do
       expect(artist.albums).to(eq([album]))
     end
   end
+
+  describe('#update') do
+    it("creates an artist for an album") do
+      artist = Artist.new({:name => "Madlib", :id => nil})
+      artist.save()
+      artist.update({:album_name => "A Love Supreme", :artist_name => "Madlib"})
+      album = Album.new({:name => "A Love Supreme", :id => nil})
+      expect(artist.albums).to(eq([album]))
+    end
+  end
 end

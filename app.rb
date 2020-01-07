@@ -52,7 +52,7 @@ end
 
 patch ('/albums/:id') do
   @album = Album.find(params[:id].to_i())
-  @album.update(params[:name])
+  @album.update({:name => params[:name], :artist_name => params[:artist_name]})
   redirect to('/albums')
 end
 
@@ -126,7 +126,7 @@ end
 
 patch ('/artists/:id') do
   @artist = Artist.find(params[:id].to_i())
-  @artist.update(params[:name])
+  @artist.update({:name => params[:name], :album_name => params[:album_name]})
   redirect to('/artists')
 end
 
