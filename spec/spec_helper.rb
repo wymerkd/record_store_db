@@ -2,6 +2,7 @@ require 'rspec'
 require 'pg'
 require 'album'
 require 'song'
+require 'artist'
 require 'pry'
 require './config'
 
