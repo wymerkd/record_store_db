@@ -1,7 +1,3 @@
-require 'rspec'
-require 'album'
-require 'song'
-require 'pry'
 require 'spec_helper'
 
 describe '#Album' do
@@ -58,10 +54,12 @@ describe '#Album' do
 
   describe('#update') do
     it("updates an album by id") do
+      artist = Artist.new({:name => "Madlib", :id => nil})
+      artist.save()
       album = Album.new({:name => "A Love Supreme", :id => nil})
       album.save()
-      album.update("A Love Supreme")
-      expect(album.name).to(eq("A Love Supreme"))
+      album.update({:artist_name => "Madlib"})
+      expect(album.artists).to(eq([artist]))
     end
   end
 
@@ -124,5 +122,4 @@ describe '#Album' do
       expect(Album.all_sold).to(eq([album]))
     end
   end
-
 end

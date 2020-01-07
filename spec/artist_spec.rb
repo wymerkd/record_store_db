@@ -109,5 +109,4 @@ describe '#Artist' do
       expect(artist.albums).to(eq([album]))
     end
   end
-
 end

@@ -50,9 +50,18 @@ class Album
     self.get_albums("SELECT * FROM albums WHERE lower(name) LIKE '%#{search}%';")
   end
 
-  def update(name)
-    @name = name
-    DB.exec("UPDATE albums SET name = '#{@name}' WHERE id = #{@id};")
+  def update(attributes)
+    if (attributes.has_key?(:name)) && (attributes.fetch(:name) != nil)
+      @name = attributes.fetch(:name)
+      DB.exec("UPDATE albums SET name = '#{@name}' WHERE id = #{@id};")
+    end
+    artist_name = attributes.fetch(:artist_name)
+    if artist_name != nil
+      artist = DB.exec("SELECT * FROM artists WHERE lower(name) =  '#{artist_name.downcase}';").first
+      if artist != nil
+        DB.exec("INSERT INTO albums_artists (artist_id, album_id) VALUES (#{artist['id'].to_i}, #{@id});")
+      end
+    end
   end
 
   def self.sort()
@@ -60,6 +69,7 @@ class Album
   end
 
   def delete
+    DB.exec("DELETE FROM albums_artists WHERE album_id = #{@id};")
     DB.exec("DELETE FROM albums WHERE id = #{@id};")
   end
 
@@ -75,9 +85,13 @@ class Album
 
   def self.random
     self.get_albums('SELECT * FROM albums ORDER BY RAND() LIMIT 1;')
-    # all_albums = self.get_albums('SELECT * FROM albums;')
-    # all_albums[rand(all_albums.length)]
   end
 
-
+  def artists
+    results = DB.exec("SELECT artist_id FROM albums_artists WHERE album_id = #{@id}")
+    id_string = results.map{ |result| result.fetch("artist_id")}.join(', ')
+    (id_string != '') ?
+      Artist.get_artists("SELECT * FROM artists WHERE id IN (#{id_string});") :
+      nil
+  end
 end

@@ -1,7 +1,3 @@
-require 'rspec'
-require 'song'
-require 'album'
-require 'pry'
 require 'spec_helper.rb'
 
 describe '#Song' do

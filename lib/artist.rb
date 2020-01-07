@@ -27,7 +27,7 @@ class Artist
     returned_artists.each() do |artist|
       name = artist.fetch('name')
       id = artist.fetch('id').to_i
-      artists.push(Album.new({:name => name, :id => id}))
+      artists.push(Artist.new({:name => name, :id => id}))
     end
     artists
   end
@@ -57,7 +57,7 @@ class Artist
     artist = DB.exec("SELECT * FROM artists WHERE id = #{id};").first
     name = artist.fetch('name')
     id = artist.fetch('id').to_i
-    Album.new({:name => name, :id => id})
+    Artist.new({:name => name, :id => id})
   end
 
   def self.search(search)
@@ -69,24 +69,16 @@ class Artist
   end
 
   def delete
+    DB.exec("DELETE FROM albums_artists WHERE artist_id = #{@id};")
     DB.exec("DELETE FROM artists WHERE id = #{@id};")
   end
 
   def albums
-    albums = []
     results = DB.exec("SELECT album_id FROM albums_artists WHERE artist_id = #{@id}")
-    id_array = []
-    results.each() do |result|
-      album_id = result.fetch("album_id").to_i()
-      id_array.push(album_id)
-    end
-    album_results = DB.exec("SELECT * FROM albums WHERE id in (#{id_array.join(', ')});")
-    album_results.each() do |album|
-      name = album.fetch("name")
-      album_id = album.fetch("id").to_i()
-      albums.push(Album.new({:name => name, :id => album_id}))
-    end
-    albums
+    id_string = results.map{ |result| result.fetch("album_id")}.join(', ')
+    (id_string != '') ?
+      Album.get_albums("SELECT * FROM albums WHERE id IN (#{id_string});") :
+      nil
   end
 
   def self.random
