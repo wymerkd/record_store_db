@@ -56,7 +56,7 @@ class Album
   end
 
   def self.sort()
-    self.get_albums('SELECT * FROM albums ORDER BY name;')
+    self.get_albums('SELECT * FROM albums ORDER BY lower(name);')
   end
 
   def delete
