@@ -1,0 +1,13 @@
+TEST_DB_PARAMS = {
+  :dbname => '',
+  :port=> 6666,
+  :user => '',
+  :password=> ''
+}
+
+DB_PARAMS = {
+  :dbname => '',
+  :port=> 6666,
+  :user => '',
+  :password=> ''
+}
